@@ -11,3 +11,8 @@ body{background:#101112;color:#f4f4f1}.header{position:absolute;inset:0 0 auto;z
 /* Wide photograph supplied by ELVN. Keep the cars visible beneath the title. */
 .hero-image{object-position:center 62%}.hero-shade{background:linear-gradient(180deg,#0009 0%,#0006 34%,#0001 64%,#0007 100%)}.hero-content{top:22%;left:8%;transform:none}.hero-content h1{font-size:clamp(44px,5vw,72px);margin-bottom:12px}.hero-copy{margin-bottom:22px;font-size:17px}.hero-content .button{padding:16px 22px}.hero-content .hero-contact{background:#fffffff0}[dir=rtl] .hero-shade{background:linear-gradient(180deg,#0009 0%,#0006 34%,#0001 64%,#0007 100%)}
 @media(max-width:600px){.hero-image{object-position:50% 68%}.hero-content{top:20%;left:8%;right:8%}.hero-content h1{font-size:39px}.hero-copy{font-size:15px;margin-bottom:23px}.hero-content .button{padding:16px 20px}.hero-shade,[dir=rtl] .hero-shade{background:linear-gradient(180deg,#000a,#0006 42%,#0001 70%,#0008)}.hero-contact{margin-top:12px}}
+/* Preserve the exact supplied ELVN letterforms, including the separated E bar. */
+.header .brand{display:block;flex:0 0 154px;width:154px;height:58px;position:relative;overflow:hidden;direction:ltr}
+.header .brand::before,.header .brand::after{content:none;display:none}
+.header .brand img{display:block;position:absolute;width:188px;max-width:none;height:auto;left:-16px;top:-66px;filter:brightness(0) invert(1);}
+@media(max-width:600px){.header .brand{flex-basis:130px;width:130px;height:49px}.header .brand img{width:159px;left:-14px;top:-56px}}
