@@ -1,10 +1,7 @@
-const previewHeading = document.querySelector('[data-i18n="headline"]');
 const previewIntro = document.querySelector('[data-i18n="intro"]');
 const previewExplore = document.querySelector('[data-i18n="explore"]');
-originals.set(previewHeading, 'ELVN Motors');
 originals.set(previewIntro, 'Find your next car. Make it yours.');
 originals.set(previewExplore, 'Explore our cars');
-translations.headline = 'ELVN Motors';
 translations.intro = 'اكتشف عربيتك الجاية. واختار اللي يليق بيك.';
 translations.explore = 'اكتشف العربيات';
 const previewContact = document.querySelector('.hero-contact span');
