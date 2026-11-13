@@ -22,12 +22,12 @@ function render() {
   $('car-subtitle').textContent = `${car.year} · ${ar ? car.colorAr : car.color} · ${number.format(car.mileage)} ${ar ? 'كم' : 'KM'}`;
   $('car-price').textContent = ar ? `${number.format(car.price)} جنيه` : `EGP ${number.format(car.price)}`;
   $('specifications').replaceChildren();
-  for(const [label,value] of [[ar?'كود العربية':'Vehicle ID',car.id],[ar?'الموديل':'Model year',car.year],[ar?'الكيلومترات':'Mileage',`${number.format(car.mileage)} ${ar?'كم':'KM'}`],[ar?'اللون':'Exterior colour',ar?car.colorAr:car.color]]) {
+  for(const [label,value] of [[ar?'الموديل':'Model year',car.year],[ar?'الكيلومترات':'Mileage',`${number.format(car.mileage)} ${ar?'كم':'KM'}`],[ar?'اللون':'Exterior colour',ar?car.colorAr:car.color]]) {
     const row = document.createElement('div'), dt = document.createElement('dt'), dd = document.createElement('dd'); dt.textContent = label; dd.textContent = value; row.append(dt,dd); $('specifications').append(row);
   }
   $('equipment').replaceChildren();
   for(const item of (ar ? car.fullFeaturesAr || car.featuresAr : car.fullFeatures || car.features)) {const li = document.createElement('li'); li.textContent = item; $('equipment').append(li);}
-  $('enquiry').href = 'https://wa.me/201110596555?text=' + encodeURIComponent(`Hello ELVN Motors, I am interested in ${car.title} ${car.year}, ${car.color}, ${number.format(car.mileage)} KM (${car.id}).`);
+  $('enquiry').href = 'https://wa.me/201110596555?text=' + encodeURIComponent(`Hello ELVN Motors, I am interested in ${car.title} ${car.year}, ${car.color}, ${number.format(car.mileage)} KM.`);
 }
 $('language').addEventListener('click', () => {lang = lang === 'en' ? 'ar' : 'en'; try {localStorage.setItem('elvn-language',lang);} catch {} render();});
 for(const id of ['previous','lightbox-prev']) $(id).addEventListener('click',()=>showPhoto(current-1,true));
@@ -38,7 +38,7 @@ $('lightbox').addEventListener('close',()=>document.body.classList.remove('viewe
 document.addEventListener('keydown',event=>{if(!car || /INPUT|TEXTAREA|SELECT/.test(event.target.tagName))return;if(event.key==='ArrowLeft'||event.key==='ArrowRight'){event.preventDefault();showPhoto(current+(event.key==='ArrowRight'?1:-1),!$('lightbox').open);}});
 for(const surface of [document.querySelector('.photo-stage'),$('full-photo')]) {let start;surface.addEventListener('touchstart',e=>{start={x:e.changedTouches[0].clientX,y:e.changedTouches[0].clientY};},{passive:true});surface.addEventListener('touchend',e=>{if(!start)return;const dx=e.changedTouches[0].clientX-start.x,dy=e.changedTouches[0].clientY-start.y;if(Math.abs(dx)>45&&Math.abs(dx)>Math.abs(dy))showPhoto(current+(dx<0?1:-1),!$('lightbox').open);start=null;},{passive:true});}
 render();
-fetch('data/cars.json?v=vehicle-ids-1').then(r=>{if(!r.ok)throw Error('Inventory unavailable');return r.json();}).then(cars=>{
+fetch('data/cars.json?v=internal-ids-1').then(r=>{if(!r.ok)throw Error('Inventory unavailable');return r.json();}).then(cars=>{
   const id = new URLSearchParams(location.search).get('id'); car = cars.find(item=>(item.id===id||item.legacyId===id)&&item.available!==false); if(!car)throw Error('Vehicle unavailable');
   photos = car.gallery?.length ? car.gallery : [car.image];
   photos.forEach((src,i)=>{const button=document.createElement('button'),img=document.createElement('img');button.type='button';button.setAttribute('aria-label',`View photograph ${i+1}`);img.src=src;img.alt=`${car.color} ${car.title} — photograph ${i+1}`;img.loading='lazy';button.append(img);button.addEventListener('click',()=>showPhoto(i));$('thumbnails').append(button);});
