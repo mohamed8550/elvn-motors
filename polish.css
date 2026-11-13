@@ -20,3 +20,7 @@ body>footer{padding-top:55px;padding-bottom:28px}.footer-top{align-items:center;
 /* Match the white car's visual scale to the other inventory covers. */
 .inventory .car-card[data-car-id="c180-amg-2026-white"] .car-image img{object-position:center 60%;transform:scale(1.08)}
 .inventory .car-card[data-car-id="c180-amg-2026-white"]:hover .car-image img{transform:scale(1.105)}
+/* Compact directions card, balanced against the contact information. */
+.visit .location-card{width:100%;max-width:420px;justify-self:end}.visit .map-pattern{height:165px}.visit .location-caption{padding:18px 20px}.visit .map-pin{width:42px;height:42px;font-size:17px;top:37%}
+@media(max-width:750px){.visit .location-card{max-width:420px;justify-self:start}.visit .map-pattern{height:150px}}
+@media(max-width:600px){.visit .location-card{max-width:360px}.visit .map-pattern{height:135px}.visit .location-caption{padding:16px 18px}}
