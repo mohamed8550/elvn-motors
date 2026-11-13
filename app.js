@@ -43,7 +43,7 @@ function renderCars() {
   document.getElementById('inventory-controls').hidden = cars.length === 0;
   for (const car of cars) {
     const ar = language === 'ar';
-    const article = document.createElement('article'); article.className = 'car-card';
+    const article = document.createElement('article'); article.className = 'car-card'; article.dataset.carId = car.id;
     const detailUrl = 'car.html?id=' + encodeURIComponent(car.id);
     const imageWrap = document.createElement('a'); imageWrap.className = 'car-image'; imageWrap.href = detailUrl; imageWrap.setAttribute('aria-label', 'View ' + car.title + ' ' + car.color);
     const img = document.createElement('img'); img.src = car.image; img.alt = `${car.title} ${car.year}`; img.loading = 'lazy'; img.width = 3072; img.height = 4096;
