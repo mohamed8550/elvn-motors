@@ -44,13 +44,14 @@ function renderCars() {
   for (const car of cars) {
     const ar = language === 'ar';
     const article = document.createElement('article'); article.className = 'car-card';
-    const imageWrap = document.createElement('div'); imageWrap.className = 'car-image';
+    const detailUrl = 'car.html?id=' + encodeURIComponent(car.id);
+    const imageWrap = document.createElement('a'); imageWrap.className = 'car-image'; imageWrap.href = detailUrl; imageWrap.setAttribute('aria-label', 'View ' + car.title + ' ' + car.color);
     const img = document.createElement('img'); img.src = car.image; img.alt = `${car.title} ${car.year}`; img.loading = 'lazy'; img.width = 3072; img.height = 4096;
     const badge = document.createElement('span'); badge.className = 'car-badge'; badge.textContent = ar ? 'متاحة الآن' : 'AVAILABLE NOW';
     imageWrap.append(img, badge);
     const body = document.createElement('div'); body.className = 'car-body';
     const make = document.createElement('p'); make.className = 'car-make'; make.textContent = 'MERCEDES-BENZ';
-    const title = document.createElement('h3'); title.textContent = car.title.replace('Mercedes-Benz ', '');
+    const title = document.createElement('h3'); const titleLink = document.createElement('a'); titleLink.href = detailUrl; titleLink.textContent = car.title.replace('Mercedes-Benz ', ''); title.append(titleLink);
     const specs = document.createElement('div'); specs.className = 'car-specs';
     for (const [label, value] of [[ar ? 'الموديل' : 'MODEL YEAR', String(car.year)], [ar ? 'الكيلومترات' : 'MILEAGE', new Intl.NumberFormat('en').format(car.mileage) + (ar ? ' كم' : ' KM')]]) {
       const item = document.createElement('div'); const small = document.createElement('span'); small.textContent = label; const strong = document.createElement('strong'); strong.textContent = value; item.append(small, strong); specs.append(item);
@@ -60,7 +61,8 @@ function renderCars() {
     const price = document.createElement('p'); price.className = 'car-price'; price.textContent = (ar ? '' : 'EGP ') + new Intl.NumberFormat('en').format(car.price) + (ar ? ' جنيه' : '');
     const link = document.createElement('a'); link.className = 'car-enquire'; link.textContent = ar ? 'استفسر عن العربية ↗' : 'Enquire about this car ↗'; link.href = 'https://wa.me/201110596555?text=' + encodeURIComponent(`Hello ELVN Motors, I am interested in ${car.title} ${car.year} (${car.id}).`); link.target = '_blank'; link.rel = 'noopener';
     const color = document.createElement("p"); color.className = "car-color"; color.textContent = ar ? car.colorAr || car.color : car.color;
-    body.append(make, title, color, specs, features, price, link); article.append(imageWrap, body); container.append(article);
+    const detailsLink = document.createElement('a'); detailsLink.className = 'car-details'; detailsLink.href = detailUrl; detailsLink.textContent = ar ? 'الصور والتفاصيل ↗' : 'View photos & details ↗';
+    body.append(make, title, color, specs, features, price, detailsLink, link); article.append(imageWrap, body); container.append(article);
   }
   requestAnimationFrame(updateInventoryControls);
 }
@@ -70,4 +72,4 @@ inventoryNext.addEventListener('click', () => moveInventory(1));
 inventoryTrack.addEventListener('scroll', updateInventoryControls, {passive:true});
 window.addEventListener('resize', updateInventoryControls);
 inventoryTrack.addEventListener('keydown', event => { if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') { event.preventDefault(); moveInventory((event.key === 'ArrowRight' ? 1 : -1) * (document.documentElement.dir === 'rtl' ? -1 : 1)); } });
-fetch('data/cars.json?v=grey-photo-2').then(response => { if (!response.ok) throw new Error('Inventory unavailable'); return response.json(); }).then(data => { cars = Array.isArray(data) ? data.filter(car => car && typeof car.title === 'string' && typeof car.image === 'string' && car.available !== false) : []; renderCars(); }).catch(() => { cars = []; renderCars(); });
+fetch('data/cars.json?v=car-pages-1').then(response => { if (!response.ok) throw new Error('Inventory unavailable'); return response.json(); }).then(data => { cars = Array.isArray(data) ? data.filter(car => car && typeof car.title === 'string' && typeof car.image === 'string' && car.available !== false) : []; renderCars(); }).catch(() => { cars = []; renderCars(); });

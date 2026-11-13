@@ -20,7 +20,20 @@
       "AMG Night Package"
     ],
     "image": "assets/c180-amg-2026-black.jpg",
-    "available": true
+    "available": true,
+    "gallery": [
+      "assets/black-gallery-1.jpg",
+      "assets/black-gallery-2.jpg",
+      "assets/black-gallery-3.jpg",
+      "assets/black-gallery-4.jpg",
+      "assets/black-gallery-5.jpg",
+      "assets/black-gallery-6.jpg",
+      "assets/black-gallery-7.jpg",
+      "assets/black-gallery-8.jpg",
+      "assets/black-gallery-9.jpg",
+      "assets/black-gallery-10.jpg",
+      "assets/black-gallery-11.jpg"
+    ]
   },
   {
     "id": "c180-amg-2026-grey",
@@ -43,7 +56,44 @@
       "كاميرا 360°"
     ],
     "image": "assets/c180-amg-2026-grey-v2.jpg",
-    "available": true
+    "available": true,
+    "gallery": [
+      "assets/grey-gallery-1.jpg",
+      "assets/grey-gallery-2.jpg",
+      "assets/grey-gallery-3.jpg",
+      "assets/grey-gallery-4.jpg",
+      "assets/grey-gallery-5.jpg",
+      "assets/grey-gallery-6.jpg",
+      "assets/grey-gallery-7.jpg",
+      "assets/grey-gallery-8.jpg",
+      "assets/grey-gallery-9.jpg"
+    ],
+    "fullFeatures": [
+      "AMG Night Package",
+      "Panoramic Roof",
+      "Memory Seats",
+      "360° Camera",
+      "Premium Ambient Lighting",
+      "Blind Spot Assist",
+      "Heated Seats",
+      "Lane Keeping Assist",
+      "Brake Assist",
+      "19” AMG Alloy Wheels",
+      "Wireless Charger"
+    ],
+    "fullFeaturesAr": [
+      "AMG Night Package",
+      "سقف بانوراما",
+      "مقاعد بذاكرة",
+      "كاميرا 360°",
+      "إضاءة داخلية محيطية",
+      "مساعد النقطة العمياء",
+      "تدفئة المقاعد",
+      "مساعد الحفاظ على المسار",
+      "مساعد الفرامل",
+      "جنوط AMG مقاس 19 بوصة",
+      "شاحن لاسلكي"
+    ]
   },
   {
     "id": "c180-amg-2026-white",
