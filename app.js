@@ -4,6 +4,7 @@ const translations = {
 Object.assign(translations, {inventoryHint: "اكتشف العربيات المتاحة", collectionTitle: "عربياتنا المتاحة.", collectionIntro: "اختار عربيتك، شوف أهم التجهيزات، وتواصل معانا لمعرفة التفاصيل."});
 Object.assign(translations, {worldTitle: "سرّ القاهرة الجديدة<br>الأجمل.", worldCopy: "سيارات استثنائية. ومكان له طابعه الخاص.", worldCopy2: "أهلًا بك في ELVN Motors — معرض مستقل في القاهرة الجديدة، نستورد فيه كل سيارة بأنفسنا. تجربة بطابع شخصي لاختيار سيارتك القادمة.", meet: "اكتشف ELVN ↗"});
 Object.assign(translations, {footerStory:"سيارات استثنائية.<br>ومكان له طابعه الخاص.",footerContact:"زور المعرض",footerAddress:"شارع 27، القاهرة الجديدة<br>القاهرة، مصر",footerDirections:"الطريق للمعرض ↗",footerFollow:"تابع عالم ELVN",footerTop:"العودة للأعلى ↑"});
+Object.assign(translations, {reviewsLabel:"تجربة ELVN",reviewsTitle:"بكلمات عملائنا.",reviewsCount:"39 تقييمًا · تمت المراجعة 13 نوفمبر 2026",reviewExcerpt:"تقييم Google · مقتطف",reviewSource:"تقييم Google",reviewsNote:"تقييمات مختارة من Google بلغتها الأصلية. يتم تحديثها يدويًا.",reviewsRead:"كل التقييمات على Google ↗",reviewsWrite:"قيّم تجربتك على Google ↗"});
 const originals = new Map();
 document.querySelectorAll('[data-i18n]').forEach(element => originals.set(element, element.innerHTML));
 let language = 'en';
