@@ -19,9 +19,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/configure-pages@v5
+      - name: Prepare public website files only
+        shell: bash
+        run: |
+          mkdir -p _site
+          cp ./*.html ./*.css ./*.js _site/
+          cp -R assets data cars _site/
+          touch _site/.nojekyll
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: _site
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
