@@ -116,6 +116,47 @@
       "كاميرا 360°"
     ],
     "image": "assets/c180-amg-2026-white.jpg",
-    "available": true
+    "available": true,
+    "gallery": [
+      "assets/white-gallery-1.jpg",
+      "assets/white-gallery-2.jpg",
+      "assets/white-gallery-3.jpg",
+      "assets/white-gallery-4.jpg",
+      "assets/white-gallery-5.jpg",
+      "assets/white-gallery-6.jpg",
+      "assets/white-gallery-7.jpg",
+      "assets/white-gallery-8.jpg",
+      "assets/white-gallery-9.jpg",
+      "assets/white-gallery-10.jpg",
+      "assets/white-gallery-11.jpg",
+      "assets/white-gallery-12.jpg",
+      "assets/white-gallery-13.jpg",
+      "assets/white-gallery-14.jpg",
+      "assets/white-gallery-15.jpg",
+      "assets/white-gallery-16.jpg",
+      "assets/white-gallery-17.jpg"
+    ],
+    "fullFeatures": [
+      "AMG Night Package",
+      "Panoramic Roof",
+      "Memory Seats",
+      "360° Camera",
+      "Premium Ambient Lighting",
+      "Blind Spot Assist",
+      "Heated Seats",
+      "Lane Keeping Assist",
+      "Brake Assist"
+    ],
+    "fullFeaturesAr": [
+      "AMG Night Package",
+      "سقف بانوراما",
+      "مقاعد بذاكرة",
+      "كاميرا 360°",
+      "إضاءة داخلية محيطية",
+      "مساعد النقطة العمياء",
+      "تدفئة المقاعد",
+      "مساعد الحفاظ على المسار",
+      "مساعد الفرامل"
+    ]
   }
 ]
