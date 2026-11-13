@@ -43,14 +43,14 @@ function renderCars() {
   document.getElementById('inventory-controls').hidden = cars.length === 0;
   for (const car of cars) {
     const ar = language === 'ar';
-    const article = document.createElement('article'); article.className = 'car-card'; article.dataset.carId = car.id;
+    const article = document.createElement('article'); article.className = 'car-card'; article.dataset.carId = car.legacyId || car.id;
     const detailUrl = 'car.html?id=' + encodeURIComponent(car.id);
     const imageWrap = document.createElement('a'); imageWrap.className = 'car-image'; imageWrap.href = detailUrl; imageWrap.setAttribute('aria-label', 'View ' + car.title + ' ' + car.color);
     const img = document.createElement('img'); img.src = car.image; img.alt = `${car.title} ${car.year}`; img.loading = 'lazy'; img.width = 3072; img.height = 4096;
     const badge = document.createElement('span'); badge.className = 'car-badge'; badge.textContent = ar ? 'متاحة الآن' : 'AVAILABLE NOW';
     imageWrap.append(img, badge);
     const body = document.createElement('div'); body.className = 'car-body';
-    const make = document.createElement('p'); make.className = 'car-make'; make.textContent = 'MERCEDES-BENZ';
+    const make = document.createElement('p'); make.className = 'car-make'; make.textContent = 'MERCEDES-BENZ · ' + car.id;
     const title = document.createElement('h3'); const titleLink = document.createElement('a'); titleLink.href = detailUrl; titleLink.textContent = car.title.replace('Mercedes-Benz ', ''); title.append(titleLink);
     const specs = document.createElement('div'); specs.className = 'car-specs';
     for (const [label, value] of [[ar ? 'الموديل' : 'MODEL YEAR', String(car.year)], [ar ? 'الكيلومترات' : 'MILEAGE', new Intl.NumberFormat('en').format(car.mileage) + (ar ? ' كم' : ' KM')]]) {
@@ -72,4 +72,4 @@ inventoryNext.addEventListener('click', () => moveInventory(1));
 inventoryTrack.addEventListener('scroll', updateInventoryControls, {passive:true});
 window.addEventListener('resize', updateInventoryControls);
 inventoryTrack.addEventListener('keydown', event => { if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') { event.preventDefault(); moveInventory((event.key === 'ArrowRight' ? 1 : -1) * (document.documentElement.dir === 'rtl' ? -1 : 1)); } });
-fetch('data/cars.json?v=white-cover-1').then(response => { if (!response.ok) throw new Error('Inventory unavailable'); return response.json(); }).then(data => { cars = Array.isArray(data) ? data.filter(car => car && typeof car.title === 'string' && typeof car.image === 'string' && car.available !== false) : []; renderCars(); }).catch(() => { cars = []; renderCars(); });
+fetch('data/cars.json?v=vehicle-ids-1').then(response => { if (!response.ok) throw new Error('Inventory unavailable'); return response.json(); }).then(data => { cars = Array.isArray(data) ? data.filter(car => car && typeof car.title === 'string' && typeof car.image === 'string' && car.available !== false) : []; renderCars(); }).catch(() => { cars = []; renderCars(); });

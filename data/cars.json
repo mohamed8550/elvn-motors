@@ -1,6 +1,6 @@
 [
   {
-    "id": "c180-amg-2026-black",
+    "id": "ELVN 14",
     "title": "Mercedes-Benz C180 AMG",
     "color": "Black",
     "colorAr": "أسود",
@@ -33,10 +33,11 @@
       "assets/black-gallery-9.jpg",
       "assets/black-gallery-10.jpg",
       "assets/black-gallery-11.jpg"
-    ]
+    ],
+    "legacyId": "c180-amg-2026-black"
   },
   {
-    "id": "c180-amg-2026-grey",
+    "id": "ELVN 7",
     "title": "Mercedes-Benz C180 AMG",
     "color": "Selenite Grey",
     "colorAr": "رمادي سيلينيت",
@@ -93,10 +94,11 @@
       "مساعد الفرامل",
       "جنوط AMG مقاس 19 بوصة",
       "شاحن لاسلكي"
-    ]
+    ],
+    "legacyId": "c180-amg-2026-grey"
   },
   {
-    "id": "c180-amg-2026-white",
+    "id": "ELVN 5",
     "title": "Mercedes-Benz C180 AMG",
     "color": "Shiny White",
     "colorAr": "أبيض",
@@ -157,6 +159,7 @@
       "تدفئة المقاعد",
       "مساعد الحفاظ على المسار",
       "مساعد الفرامل"
-    ]
+    ],
+    "legacyId": "c180-amg-2026-white"
   }
 ]
