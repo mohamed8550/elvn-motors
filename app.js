@@ -61,6 +61,13 @@ function renderCars() {
     const features = document.createElement('ul'); features.className = 'car-features';
     for (const feature of (ar ? car.featuresAr || car.features : car.features) || []) { const li = document.createElement('li'); li.textContent = feature; features.append(li); }
     const price = document.createElement('p'); price.className = 'car-price'; price.textContent = (ar ? '' : 'EGP ') + new Intl.NumberFormat('en').format(car.price) + (ar ? ' جنيه' : '');
+    if (car.originalPrice > car.price) {
+      const current = price.textContent; price.replaceChildren(); price.classList.add('offer-price');
+      const old = document.createElement('del'); old.textContent = (ar ? '' : 'EGP ') + new Intl.NumberFormat('en').format(car.originalPrice) + (ar ? ' جنيه' : ''); old.setAttribute('aria-label', ar ? 'السعر السابق' : 'Previous price');
+      const label = document.createElement('span'); label.className = 'offer-label'; label.textContent = ar ? 'عرض خاص' : 'SPECIAL OFFER';
+      const now = document.createElement('ins'); now.textContent = current; now.setAttribute('aria-label', ar ? 'سعر العرض' : 'Offer price');
+      price.append(old, label, now);
+    }
     const link = document.createElement('a'); link.className = 'car-enquire'; link.textContent = ar ? 'استفسر عن العربية ↗' : 'Enquire about this car ↗'; link.href = 'https://wa.me/201110596555?text=' + encodeURIComponent(`Hello ELVN Motors, I am interested in ${car.title} ${car.year} (${car.color}).`); link.target = '_blank'; link.rel = 'noopener';
     const color = document.createElement("p"); color.className = "car-color"; color.textContent = ar ? car.colorAr || car.color : car.color;
     const detailsLink = document.createElement('a'); detailsLink.className = 'car-details'; detailsLink.href = detailUrl; detailsLink.textContent = ar ? 'الصور والتفاصيل ↗' : 'View photos & details ↗';
@@ -74,4 +81,4 @@ inventoryNext.addEventListener('click', () => moveInventory(1));
 inventoryTrack.addEventListener('scroll', updateInventoryControls, {passive:true});
 window.addEventListener('resize', updateInventoryControls);
 inventoryTrack.addEventListener('keydown', event => { if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') { event.preventDefault(); moveInventory((event.key === 'ArrowRight' ? 1 : -1) * (document.documentElement.dir === 'rtl' ? -1 : 1)); } });
-fetch('data/cars.json?v=internal-ids-1').then(response => { if (!response.ok) throw new Error('Inventory unavailable'); return response.json(); }).then(data => { cars = Array.isArray(data) ? data.filter(car => car && typeof car.title === 'string' && typeof car.image === 'string' && car.available !== false) : []; renderCars(); }).catch(() => { cars = []; renderCars(); });
+fetch('data/cars.json?v=offer-1').then(response => { if (!response.ok) throw new Error('Inventory unavailable'); return response.json(); }).then(data => { cars = Array.isArray(data) ? data.filter(car => car && typeof car.title === 'string' && typeof car.image === 'string' && car.available !== false) : []; renderCars(); }).catch(() => { cars = []; renderCars(); });

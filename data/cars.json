@@ -43,7 +43,7 @@
     "colorAr": "رمادي سيلينيت",
     "year": 2026,
     "mileage": 7500,
-    "price": 3600000,
+    "price": 3550000,
     "features": [
       "AMG Night Package",
       "Panoramic Roof",
@@ -95,7 +95,8 @@
       "جنوط AMG مقاس 19 بوصة",
       "شاحن لاسلكي"
     ],
-    "legacyId": "c180-amg-2026-grey"
+    "legacyId": "c180-amg-2026-grey",
+    "originalPrice": 3600000
   },
   {
     "id": "ELVN 5",
@@ -104,7 +105,7 @@
     "colorAr": "أبيض",
     "year": 2026,
     "mileage": 7600,
-    "price": 3600000,
+    "price": 3550000,
     "features": [
       "AMG Night Package",
       "Panoramic Roof",
@@ -160,6 +161,7 @@
       "مساعد الحفاظ على المسار",
       "مساعد الفرامل"
     ],
-    "legacyId": "c180-amg-2026-white"
+    "legacyId": "c180-amg-2026-white",
+    "originalPrice": 3600000
   }
 ]

@@ -21,6 +21,14 @@ function render() {
   $('car-title').textContent = car.title;
   $('car-subtitle').textContent = `${car.year} · ${ar ? car.colorAr : car.color} · ${number.format(car.mileage)} ${ar ? 'كم' : 'KM'}`;
   $('car-price').textContent = ar ? `${number.format(car.price)} جنيه` : `EGP ${number.format(car.price)}`;
+  $('car-price').classList.toggle('offer-price', car.originalPrice > car.price);
+  if (car.originalPrice > car.price) {
+    const current = $('car-price').textContent; $('car-price').replaceChildren();
+    const old = document.createElement('del'); old.textContent = ar ? number.format(car.originalPrice) + ' جنيه' : 'EGP ' + number.format(car.originalPrice); old.setAttribute('aria-label', ar ? 'السعر السابق' : 'Previous price');
+    const label = document.createElement('span'); label.className = 'offer-label'; label.textContent = ar ? 'عرض خاص' : 'SPECIAL OFFER';
+    const now = document.createElement('ins'); now.textContent = current; now.setAttribute('aria-label', ar ? 'سعر العرض' : 'Offer price');
+    $('car-price').append(old, label, now);
+  }
   $('specifications').replaceChildren();
   for(const [label,value] of [[ar?'الموديل':'Model year',car.year],[ar?'الكيلومترات':'Mileage',`${number.format(car.mileage)} ${ar?'كم':'KM'}`],[ar?'اللون':'Exterior colour',ar?car.colorAr:car.color]]) {
     const row = document.createElement('div'), dt = document.createElement('dt'), dd = document.createElement('dd'); dt.textContent = label; dd.textContent = value; row.append(dt,dd); $('specifications').append(row);
@@ -38,7 +46,7 @@ $('lightbox').addEventListener('close',()=>document.body.classList.remove('viewe
 document.addEventListener('keydown',event=>{if(!car || /INPUT|TEXTAREA|SELECT/.test(event.target.tagName))return;if(event.key==='ArrowLeft'||event.key==='ArrowRight'){event.preventDefault();showPhoto(current+(event.key==='ArrowRight'?1:-1),!$('lightbox').open);}});
 for(const surface of [document.querySelector('.photo-stage'),$('full-photo')]) {let start;surface.addEventListener('touchstart',e=>{start={x:e.changedTouches[0].clientX,y:e.changedTouches[0].clientY};},{passive:true});surface.addEventListener('touchend',e=>{if(!start)return;const dx=e.changedTouches[0].clientX-start.x,dy=e.changedTouches[0].clientY-start.y;if(Math.abs(dx)>45&&Math.abs(dx)>Math.abs(dy))showPhoto(current+(dx<0?1:-1),!$('lightbox').open);start=null;},{passive:true});}
 render();
-fetch('data/cars.json?v=internal-ids-1').then(r=>{if(!r.ok)throw Error('Inventory unavailable');return r.json();}).then(cars=>{
+fetch('data/cars.json?v=offer-1').then(r=>{if(!r.ok)throw Error('Inventory unavailable');return r.json();}).then(cars=>{
   const pathSlug = location.pathname.split('/').filter(Boolean).at(-1); const id = new URLSearchParams(location.search).get('id') || (/^elvn-\d+$/i.test(pathSlug || '') ? pathSlug.toUpperCase().replace('-', ' ') : null); car = cars.find(item=>(item.id===id||item.legacyId===id)&&item.available!==false); if(!car)throw Error('Vehicle unavailable');
   photos = car.gallery?.length ? car.gallery : [car.image];
   photos.forEach((src,i)=>{const button=document.createElement('button'),img=document.createElement('img');button.type='button';button.setAttribute('aria-label',`View photograph ${i+1}`);img.src=src;img.alt=`${car.color} ${car.title} — photograph ${i+1}`;img.loading='lazy';button.append(img);button.addEventListener('click',()=>showPhoto(i));$('thumbnails').append(button);});
