@@ -220,5 +220,53 @@
     ],
     "legacyId": "c180-amg-2026-white",
     "originalPrice": 3600000
+  },
+  {
+    "id": "ELVN 10",
+    "title": "Mercedes-Benz C180 AMG",
+    "year": 2026,
+    "mileage": 3500,
+    "color": "Black",
+    "colorAr": "أسود",
+    "interior": "Brown interior",
+    "interiorAr": "فرش بني",
+    "price": 3600000,
+    "features": [
+      "Panoramic Roof",
+      "Memory Seats",
+      "360° Camera"
+    ],
+    "featuresAr": [
+      "سقف بانوراما",
+      "مقاعد بذاكرة",
+      "كاميرا 360°"
+    ],
+    "image": null,
+    "comingSoon": true,
+    "available": true
+  },
+  {
+    "id": "ELVN 11",
+    "title": "Mercedes-Benz C180 AMG",
+    "year": 2026,
+    "mileage": 5400,
+    "color": "Black",
+    "colorAr": "أسود",
+    "interior": "Brown interior",
+    "interiorAr": "فرش بني",
+    "price": 3600000,
+    "features": [
+      "Panoramic Roof",
+      "Memory Seats",
+      "360° Camera"
+    ],
+    "featuresAr": [
+      "سقف بانوراما",
+      "مقاعد بذاكرة",
+      "كاميرا 360°"
+    ],
+    "image": null,
+    "comingSoon": true,
+    "available": true
   }
 ]

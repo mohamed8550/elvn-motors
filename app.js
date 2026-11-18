@@ -52,7 +52,8 @@ function renderCars() {
     const imageWrap = document.createElement('a'); imageWrap.className = 'car-image'; imageWrap.href = detailUrl; imageWrap.setAttribute('aria-label', 'View ' + car.title + ' ' + car.color);
     const img = document.createElement('img'); img.src = car.image; img.alt = `${car.title} ${car.year || ''}`; img.loading = 'lazy'; img.width = 3072; img.height = 4096;
     const badge = document.createElement('span'); badge.className = 'car-badge'; badge.textContent = ar ? 'متاحة الآن' : 'AVAILABLE NOW';
-    imageWrap.append(img, badge);
+    if(car.image) imageWrap.append(img); else imageWrap.classList.add('photo-pending');
+    imageWrap.append(badge);
     if(car.comingSoon){const teaser=document.createElement('span');teaser.className='car-teaser';const teaserLabel=document.createElement('span');teaserLabel.className='teaser-label';teaserLabel.textContent=ar?'لمحة أولى':'A FIRST LOOK';const teaserTitle=document.createElement('strong');teaserTitle.textContent=ar?'كل التفاصيل. قريبًا.':'The full reveal.';const teaserNote=document.createElement('small');teaserNote.textContent=ar?'قريبًا':'Coming soon';teaser.append(teaserLabel,teaserTitle,teaserNote);imageWrap.append(teaser);badge.remove();}
     const body = document.createElement('div'); body.className = 'car-body';
     const make = document.createElement('p'); make.className = 'car-make'; make.textContent = 'MERCEDES-BENZ';
@@ -74,7 +75,7 @@ function renderCars() {
       price.append(old, label, now);
     }
     const link = document.createElement('a'); link.className = 'car-enquire'; link.textContent = ar ? 'استفسر عن العربية ↗' : 'Enquire about this car ↗'; link.href = 'https://wa.me/201110596555?text=' + encodeURIComponent(`Hello ELVN Motors, I am interested in ${car.title} ${car.year || ''} (${car.color}).`); link.target = '_blank'; link.rel = 'noopener';
-    const color = document.createElement("p"); color.className = "car-color"; color.textContent = ar ? car.colorAr || car.color : car.color;
+    const color = document.createElement("p"); color.className = "car-color"; color.textContent = (ar ? car.colorAr || car.color : car.color) + (car.interior ? ' · ' + (ar ? car.interiorAr || car.interior : car.interior) : '');
     const detailsLink = document.createElement('a'); detailsLink.className = 'car-details'; detailsLink.href = detailUrl; detailsLink.textContent = car.comingSoon ? (ar?'استفسر عن التفاصيل ↗':'Enquire for details ↗') : (ar ? 'الصور والتفاصيل ↗' : 'View photos & details ↗');
     body.append(make, title, color, specs, features, price, detailsLink, link); article.append(imageWrap, body); container.append(article);
   }
@@ -86,4 +87,4 @@ inventoryNext.addEventListener('click', () => moveInventory(1));
 inventoryTrack.addEventListener('scroll', updateInventoryControls, {passive:true});
 window.addEventListener('resize', updateInventoryControls);
 inventoryTrack.addEventListener('keydown', event => { if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') { event.preventDefault(); moveInventory((event.key === 'ArrowRight' ? 1 : -1) * (document.documentElement.dir === 'rtl' ? -1 : 1)); } });
-fetch('data/cars.json?v=blue-teaser').then(response => { if (!response.ok) throw new Error('Inventory unavailable'); return response.json(); }).then(data => { cars = Array.isArray(data) ? data.filter(car => car && typeof car.title === 'string' && typeof car.image === 'string' && car.available !== false) : []; renderCars(); }).catch(() => { cars = []; renderCars(); });
+fetch('data/cars.json?v=twins-2026').then(response => { if (!response.ok) throw new Error('Inventory unavailable'); return response.json(); }).then(data => { cars = Array.isArray(data) ? data.filter(car => car && typeof car.title === 'string' && (typeof car.image === 'string' || car.comingSoon === true) && car.available !== false) : []; renderCars(); }).catch(() => { cars = []; renderCars(); });
