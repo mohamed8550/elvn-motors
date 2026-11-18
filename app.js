@@ -53,7 +53,7 @@ function renderCars() {
     const img = document.createElement('img'); img.src = car.image; img.alt = `${car.title} ${car.year || ''}`; img.loading = 'lazy'; img.width = 3072; img.height = 4096;
     const badge = document.createElement('span'); badge.className = 'car-badge'; badge.textContent = ar ? 'متاحة الآن' : 'AVAILABLE NOW';
     imageWrap.append(img, badge);
-    if(car.comingSoon){const teaser=document.createElement('span');teaser.className='car-teaser';teaser.textContent=ar?'المزيد من التفاصيل قريبًا':'More details soon';imageWrap.append(teaser);badge.textContent=ar?'قريبًا':'COMING SOON';}
+    if(car.comingSoon){const teaser=document.createElement('span');teaser.className='car-teaser';const teaserLabel=document.createElement('span');teaserLabel.className='teaser-label';teaserLabel.textContent=ar?'لمحة أولى':'A FIRST LOOK';const teaserTitle=document.createElement('strong');teaserTitle.textContent=ar?'كل التفاصيل. قريبًا.':'The full reveal.';const teaserNote=document.createElement('small');teaserNote.textContent=ar?'قريبًا':'Coming soon';teaser.append(teaserLabel,teaserTitle,teaserNote);imageWrap.append(teaser);badge.remove();}
     const body = document.createElement('div'); body.className = 'car-body';
     const make = document.createElement('p'); make.className = 'car-make'; make.textContent = 'MERCEDES-BENZ';
     const title = document.createElement('h3'); const titleLink = document.createElement('a'); titleLink.href = detailUrl; titleLink.textContent = car.title.replace('Mercedes-Benz ', ''); title.append(titleLink);
