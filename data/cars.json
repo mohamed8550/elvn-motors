@@ -1,5 +1,34 @@
 [
   {
+    "id": "ELVN 15",
+    "title": "Mercedes-Benz C180 AMG",
+    "year": 2025,
+    "mileage": 11550,
+    "color": "Spectral Blue",
+    "colorAr": "أزرق سبيكترال",
+    "price": 3475000,
+    "originalPrice": 3550000,
+    "features": [
+      "Panoramic Roof",
+      "Memory Seats",
+      "360° Camera",
+      "KEYLESS-GO",
+      "Electric Tailgate"
+    ],
+    "featuresAr": [
+      "سقف بانوراما",
+      "مقاعد بذاكرة",
+      "كاميرا 360°",
+      "KEYLESS-GO",
+      "شنطة كهربائية"
+    ],
+    "image": "assets/elvn-15-spectral-blue.jpg",
+    "gallery": [
+      "assets/elvn-15-spectral-blue.jpg"
+    ],
+    "available": true
+  },
+  {
     "id": "ELVN1",
     "title": "Mercedes-Benz C180 AMG",
     "color": "Silver",
