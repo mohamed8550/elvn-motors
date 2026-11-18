@@ -26,7 +26,8 @@
     "gallery": [
       "assets/elvn-15-spectral-blue.jpg"
     ],
-    "available": true
+    "available": true,
+    "comingSoon": true
   },
   {
     "id": "ELVN1",

@@ -47,7 +47,7 @@ function renderCars() {
   for (const car of cars) {
     const ar = language === 'ar';
     const article = document.createElement('article'); article.className = 'car-card'; article.dataset.carId = car.legacyId || car.id;
-    const detailUrl = car.comingSoon ? 'https://wa.me/201110596555?text=' + encodeURIComponent('Hello ELVN Motors, I am interested in the Silver Mercedes-Benz C180 AMG, 14,740 KM.') : 'cars/' + car.id.toLowerCase().split(' ').join('-') + '/';
+    const detailUrl = car.comingSoon ? 'https://wa.me/201110596555?text=' + encodeURIComponent(`Hello ELVN Motors, I am interested in ${car.color} ${car.title}, ${car.mileage} KM.`) : 'cars/' + car.id.toLowerCase().split(' ').join('-') + '/';
     if(car.comingSoon) article.classList.add('coming-soon');
     const imageWrap = document.createElement('a'); imageWrap.className = 'car-image'; imageWrap.href = detailUrl; imageWrap.setAttribute('aria-label', 'View ' + car.title + ' ' + car.color);
     const img = document.createElement('img'); img.src = car.image; img.alt = `${car.title} ${car.year || ''}`; img.loading = 'lazy'; img.width = 3072; img.height = 4096;
@@ -86,4 +86,4 @@ inventoryNext.addEventListener('click', () => moveInventory(1));
 inventoryTrack.addEventListener('scroll', updateInventoryControls, {passive:true});
 window.addEventListener('resize', updateInventoryControls);
 inventoryTrack.addEventListener('keydown', event => { if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') { event.preventDefault(); moveInventory((event.key === 'ArrowRight' ? 1 : -1) * (document.documentElement.dir === 'rtl' ? -1 : 1)); } });
-fetch('data/cars.json?v=elvn15').then(response => { if (!response.ok) throw new Error('Inventory unavailable'); return response.json(); }).then(data => { cars = Array.isArray(data) ? data.filter(car => car && typeof car.title === 'string' && typeof car.image === 'string' && car.available !== false) : []; renderCars(); }).catch(() => { cars = []; renderCars(); });
+fetch('data/cars.json?v=blue-teaser').then(response => { if (!response.ok) throw new Error('Inventory unavailable'); return response.json(); }).then(data => { cars = Array.isArray(data) ? data.filter(car => car && typeof car.title === 'string' && typeof car.image === 'string' && car.available !== false) : []; renderCars(); }).catch(() => { cars = []; renderCars(); });

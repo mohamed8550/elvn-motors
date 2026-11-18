@@ -16,6 +16,8 @@ function render() {
   $('language').textContent = lang === 'ar' ? 'English' : 'العربية';
   document.querySelectorAll('[data-copy]').forEach(element => element.textContent = words[lang][element.dataset.copy]);
   if(!car) return;
+  document.body.classList.toggle('vehicle-coming-soon',!!car.comingSoon);
+  if(car.comingSoon){$('enlarge').disabled=true;document.querySelector('.photo-hint').textContent=lang==='ar'?'كل التفاصيل. قريبًا.':'The full reveal. Coming soon';}
   const ar = lang === 'ar', number = new Intl.NumberFormat('en');
   document.title = `${car.title} ${car.year} — ${car.color} | ELVN Motors`;
   $('car-title').textContent = car.title;
@@ -46,7 +48,7 @@ $('lightbox').addEventListener('close',()=>document.body.classList.remove('viewe
 document.addEventListener('keydown',event=>{if(!car || /INPUT|TEXTAREA|SELECT/.test(event.target.tagName))return;if(event.key==='ArrowLeft'||event.key==='ArrowRight'){event.preventDefault();showPhoto(current+(event.key==='ArrowRight'?1:-1),!$('lightbox').open);}});
 for(const surface of [document.querySelector('.photo-stage'),$('full-photo')]) {let start;surface.addEventListener('touchstart',e=>{start={x:e.changedTouches[0].clientX,y:e.changedTouches[0].clientY};},{passive:true});surface.addEventListener('touchend',e=>{if(!start)return;const dx=e.changedTouches[0].clientX-start.x,dy=e.changedTouches[0].clientY-start.y;if(Math.abs(dx)>45&&Math.abs(dx)>Math.abs(dy))showPhoto(current+(dx<0?1:-1),!$('lightbox').open);start=null;},{passive:true});}
 render();
-fetch('data/cars.json?v=elvn15').then(r=>{if(!r.ok)throw Error('Inventory unavailable');return r.json();}).then(cars=>{
+fetch('data/cars.json?v=blue-teaser').then(r=>{if(!r.ok)throw Error('Inventory unavailable');return r.json();}).then(cars=>{
   const pathSlug = location.pathname.split('/').filter(Boolean).at(-1); const id = new URLSearchParams(location.search).get('id') || (/^elvn-\d+$/i.test(pathSlug || '') ? pathSlug.toUpperCase().replace('-', ' ') : null); car = cars.find(item=>(item.id===id||item.legacyId===id)&&item.available!==false); if(!car)throw Error('Vehicle unavailable');
   photos = car.gallery?.length ? car.gallery : [car.image];
   photos.forEach((src,i)=>{const button=document.createElement('button'),img=document.createElement('img');button.type='button';button.setAttribute('aria-label',`View photograph ${i+1}`);img.src=src;img.alt=`${car.color} ${car.title} — photograph ${i+1}`;img.loading='lazy';button.append(img);button.addEventListener('click',()=>showPhoto(i));$('thumbnails').append(button);});
