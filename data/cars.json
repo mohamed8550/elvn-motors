@@ -5,8 +5,8 @@
     "color": "Silver",
     "colorAr": "سيلفر",
     "mileage": 14740,
-    "price": null,
-    "year": null,
+    "price": 3425000,
+    "year": 2025,
     "comingSoon": true,
     "features": [
       "Panoramic Roof",
@@ -23,7 +23,8 @@
       "AMG Night Package"
     ],
     "image": "assets/elvn1-silver.jpg",
-    "available": true
+    "available": true,
+    "originalPrice": 3500000
   },
   {
     "id": "ELVN 14",
