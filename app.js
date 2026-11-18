@@ -47,21 +47,25 @@ function renderCars() {
   for (const car of cars) {
     const ar = language === 'ar';
     const article = document.createElement('article'); article.className = 'car-card'; article.dataset.carId = car.legacyId || car.id;
-    const detailUrl = 'cars/' + car.id.toLowerCase().split(' ').join('-') + '/';
+    const detailUrl = car.comingSoon ? 'https://wa.me/201110596555?text=' + encodeURIComponent('Hello ELVN Motors, I am interested in the Silver Mercedes-Benz C180 AMG, 14,740 KM.') : 'cars/' + car.id.toLowerCase().split(' ').join('-') + '/';
+    if(car.comingSoon) article.classList.add('coming-soon');
     const imageWrap = document.createElement('a'); imageWrap.className = 'car-image'; imageWrap.href = detailUrl; imageWrap.setAttribute('aria-label', 'View ' + car.title + ' ' + car.color);
-    const img = document.createElement('img'); img.src = car.image; img.alt = `${car.title} ${car.year}`; img.loading = 'lazy'; img.width = 3072; img.height = 4096;
+    const img = document.createElement('img'); img.src = car.image; img.alt = `${car.title} ${car.year || ''}`; img.loading = 'lazy'; img.width = 3072; img.height = 4096;
     const badge = document.createElement('span'); badge.className = 'car-badge'; badge.textContent = ar ? 'متاحة الآن' : 'AVAILABLE NOW';
     imageWrap.append(img, badge);
+    if(car.comingSoon){const teaser=document.createElement('span');teaser.className='car-teaser';teaser.textContent=ar?'المزيد من التفاصيل قريبًا':'More details soon';imageWrap.append(teaser);badge.textContent=ar?'قريبًا':'COMING SOON';}
     const body = document.createElement('div'); body.className = 'car-body';
     const make = document.createElement('p'); make.className = 'car-make'; make.textContent = 'MERCEDES-BENZ';
     const title = document.createElement('h3'); const titleLink = document.createElement('a'); titleLink.href = detailUrl; titleLink.textContent = car.title.replace('Mercedes-Benz ', ''); title.append(titleLink);
     const specs = document.createElement('div'); specs.className = 'car-specs';
-    for (const [label, value] of [[ar ? 'الموديل' : 'MODEL YEAR', String(car.year)], [ar ? 'الكيلومترات' : 'MILEAGE', new Intl.NumberFormat('en').format(car.mileage) + (ar ? ' كم' : ' KM')]]) {
+    for (const [label, value] of [[ar ? 'الموديل' : 'MODEL YEAR', car.year ? String(car.year) : null], [ar ? 'الكيلومترات' : 'MILEAGE', new Intl.NumberFormat('en').format(car.mileage) + (ar ? ' كم' : ' KM')]]) {
+      if(value === null) continue;
       const item = document.createElement('div'); const small = document.createElement('span'); small.textContent = label; const strong = document.createElement('strong'); strong.textContent = value; item.append(small, strong); specs.append(item);
     }
     const features = document.createElement('ul'); features.className = 'car-features';
     for (const feature of (ar ? car.featuresAr || car.features : car.features) || []) { const li = document.createElement('li'); li.textContent = feature; features.append(li); }
     const price = document.createElement('p'); price.className = 'car-price'; price.textContent = (ar ? '' : 'EGP ') + new Intl.NumberFormat('en').format(car.price) + (ar ? ' جنيه' : '');
+    if(car.price == null) price.textContent=ar?'السعر قريبًا':'Price coming soon';
     if (car.originalPrice > car.price) {
       const current = price.textContent; price.replaceChildren(); price.classList.add('offer-price');
       const old = document.createElement('del'); old.textContent = (ar ? '' : 'EGP ') + new Intl.NumberFormat('en').format(car.originalPrice) + (ar ? ' جنيه' : ''); old.setAttribute('aria-label', ar ? 'السعر السابق' : 'Previous price');
@@ -69,9 +73,9 @@ function renderCars() {
       const now = document.createElement('ins'); now.textContent = current; now.setAttribute('aria-label', ar ? 'سعر العرض' : 'Offer price');
       price.append(old, label, now);
     }
-    const link = document.createElement('a'); link.className = 'car-enquire'; link.textContent = ar ? 'استفسر عن العربية ↗' : 'Enquire about this car ↗'; link.href = 'https://wa.me/201110596555?text=' + encodeURIComponent(`Hello ELVN Motors, I am interested in ${car.title} ${car.year} (${car.color}).`); link.target = '_blank'; link.rel = 'noopener';
+    const link = document.createElement('a'); link.className = 'car-enquire'; link.textContent = ar ? 'استفسر عن العربية ↗' : 'Enquire about this car ↗'; link.href = 'https://wa.me/201110596555?text=' + encodeURIComponent(`Hello ELVN Motors, I am interested in ${car.title} ${car.year || ''} (${car.color}).`); link.target = '_blank'; link.rel = 'noopener';
     const color = document.createElement("p"); color.className = "car-color"; color.textContent = ar ? car.colorAr || car.color : car.color;
-    const detailsLink = document.createElement('a'); detailsLink.className = 'car-details'; detailsLink.href = detailUrl; detailsLink.textContent = ar ? 'الصور والتفاصيل ↗' : 'View photos & details ↗';
+    const detailsLink = document.createElement('a'); detailsLink.className = 'car-details'; detailsLink.href = detailUrl; detailsLink.textContent = car.comingSoon ? (ar?'استفسر عن التفاصيل ↗':'Enquire for details ↗') : (ar ? 'الصور والتفاصيل ↗' : 'View photos & details ↗');
     body.append(make, title, color, specs, features, price, detailsLink, link); article.append(imageWrap, body); container.append(article);
   }
   requestAnimationFrame(updateInventoryControls);
@@ -82,4 +86,4 @@ inventoryNext.addEventListener('click', () => moveInventory(1));
 inventoryTrack.addEventListener('scroll', updateInventoryControls, {passive:true});
 window.addEventListener('resize', updateInventoryControls);
 inventoryTrack.addEventListener('keydown', event => { if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') { event.preventDefault(); moveInventory((event.key === 'ArrowRight' ? 1 : -1) * (document.documentElement.dir === 'rtl' ? -1 : 1)); } });
-fetch('data/cars.json?v=offer-1').then(response => { if (!response.ok) throw new Error('Inventory unavailable'); return response.json(); }).then(data => { cars = Array.isArray(data) ? data.filter(car => car && typeof car.title === 'string' && typeof car.image === 'string' && car.available !== false) : []; renderCars(); }).catch(() => { cars = []; renderCars(); });
+fetch('data/cars.json?v=elvn1').then(response => { if (!response.ok) throw new Error('Inventory unavailable'); return response.json(); }).then(data => { cars = Array.isArray(data) ? data.filter(car => car && typeof car.title === 'string' && typeof car.image === 'string' && car.available !== false) : []; renderCars(); }).catch(() => { cars = []; renderCars(); });

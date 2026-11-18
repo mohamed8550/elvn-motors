@@ -1,5 +1,31 @@
 [
   {
+    "id": "ELVN1",
+    "title": "Mercedes-Benz C180 AMG",
+    "color": "Silver",
+    "colorAr": "سيلفر",
+    "mileage": 14740,
+    "price": null,
+    "year": null,
+    "comingSoon": true,
+    "features": [
+      "Panoramic Roof",
+      "Memory Seats",
+      "360° Camera",
+      "Burmester Sound System",
+      "AMG Night Package"
+    ],
+    "featuresAr": [
+      "سقف بانوراما",
+      "مقاعد بذاكرة",
+      "كاميرا 360°",
+      "نظام صوت Burmester",
+      "AMG Night Package"
+    ],
+    "image": "assets/elvn1-silver.jpg",
+    "available": true
+  },
+  {
     "id": "ELVN 14",
     "title": "Mercedes-Benz C180 AMG",
     "color": "Black",
